@@ -1,9 +1,8 @@
 import { app, BrowserWindow } from "electron";
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const require = createRequire(import.meta.url);
+// const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
@@ -23,14 +22,13 @@ let win: BrowserWindow | null;
 
 function createWindow() {
   win = new BrowserWindow({
-    // icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    icon: path.join(process.env.VITE_PUBLIC, "minilogo.svg"),
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
       webSecurity: false,
-      allowRunningInsecureContent: true
+      allowRunningInsecureContent: true,
     },
     autoHideMenuBar: true,
-    
   });
 
   // Test active push message to Renderer-process.
@@ -38,16 +36,12 @@ function createWindow() {
   //   win?.webContents.send('main-process-message', (new Date).toLocaleString())
   // })
 
-  win.loadURL("http://localhost:5173/");
+  win.loadURL("https://arianapasteleria.com");
 
   win.on("closed", () => {
     win = null;
   });
 }
-
-app.whenReady().then(() => {
-  createWindow();
-});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
